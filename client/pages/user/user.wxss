@@ -1,0 +1,83 @@
+/* pages/user/user.wxss */
+.user-title {
+  margin: 30rpx;
+  text-align: center;
+  font-size: 30rpx;
+  font-weight: bold;
+}
+
+.movie-list {
+    margin: 50rpx 30rpx 110rpx 30rpx;
+}
+
+.movie-card {
+    margin: 30rpx 0;
+    display: flex;
+    background-color: rgb(255, 255, 255);
+}
+
+.movie-image {
+    width: 260rpx;
+}
+
+.movie-info {
+  margin: 0 20rpx;
+  width: 520rpx;
+}
+
+.movie-name {
+    font-size: 36rpx;
+    margin: 30rpx 0;
+    font-weight: bold;
+}
+
+.movie-type {
+    font-size: 30rpx;
+    margin-top: 30rpx;
+    color: rgba(0, 0, 0, 0.795);
+    overflow:hidden;
+    display:-webkit-box;
+    text-overflow:ellipsis;
+    -webkit-line-clamp:2;
+    -webkit-box-orient:vertical;
+    white-space:normal;
+}
+
+.comment-card {
+  display: flex;
+  margin-top: 30rpx;
+}
+
+.comment-avator {
+  height: 50rpx;
+  width: 50rpx;
+  border-radius: 50%;
+  margin: 10rpx;
+}
+
+.comment-text {
+  font-size: 32rpx;
+  margin: 15rpx;
+  color: rgb(128, 128, 128);
+}
+
+.opr-cnt {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+}
+
+.opr-back {
+  flex: 1;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #34373D;
+  font-weight: bold;
+  background: white;
+  border: 1rpx solid rgb(221, 221, 221)
+}

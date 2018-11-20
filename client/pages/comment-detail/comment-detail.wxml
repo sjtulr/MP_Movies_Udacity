@@ -1,0 +1,15 @@
+<!--pages/comment-detail/comment-detail.wxml-->
+
+<view class='detail-card'>
+  <image class='detail-image' mode='widthFix' src='{{movie.image}}'></image>
+  <view class='detail-name'>{{movie.title}}</view>
+  <view class='comment-card'>
+    <image class='comment-avator' src='{{comment.avatar}}'></image>
+    <view class='comment-text'>{{comment.username}}的影评</view>
+  </view>
+  <view class='detail-desc'>{{comment.content}}</view>
+  <view class='detail-opt'>
+    <view class='opt-star-comment' bindtap='starComment'>收藏影评</view>
+    <view class='opt-add-comment'>撰写影评</view>
+  </view>
+</view>

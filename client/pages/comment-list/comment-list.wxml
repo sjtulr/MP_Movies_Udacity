@@ -1,0 +1,11 @@
+<!--pages/comment-list/comment-list.wxml-->
+
+<view class='comment-list'>
+  <view class='comment-card' wx:key='{{item.id}}' wx:for='{{commentList}}' bindtap='commentDetail' data-id='{{item.id}}'>
+    <view class='comment-author'>
+      <image class='comment-avatar' src='{{item.avatar}}'></image>
+      <view class='comment-username'>{{item.username}}</view>
+    </view>
+    <view class='comment-content'>{{item.content}}</view>
+  </view>
+</view>

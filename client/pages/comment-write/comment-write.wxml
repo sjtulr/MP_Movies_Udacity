@@ -1,0 +1,8 @@
+<!--pages/comment-write/comment-write.wxml-->
+<button bindtap='startRecode'>开始录音</button>  
+<button bindtap='play'>播放录音</button>  
+<button bindtap='endRecode'>停止录音</button>
+
+<button bindtap='chooseImage'>选择图片</button>
+
+<button bindtap='uploadImage'>上传图片</button>

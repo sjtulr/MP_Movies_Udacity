@@ -1,0 +1,46 @@
+/* pages/comment-list/comment-list.wxss */
+.comment-list {
+  margin: 30rpx;
+  background-color: white;
+  padding: 0 20rpx;
+}
+
+.comment-card {
+  margin: 0 20rpx;
+  padding: 30rpx 30rpx;
+  border-bottom: 1rpx solid rgb(247, 247, 247);
+}
+
+.comment-author {
+  display: flex;
+  margin: 10rpx;
+}
+
+.comment-avatar {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+}
+
+.comment-username {
+  margin: 20rpx 30rpx 0 30rpx;
+  font-size: 36rpx;
+}
+
+.comment-content {
+  margin-top: 20rpx;
+  font-size: 30rpx;
+    /**
+    思路：
+    1.设置inline-block属相
+    2.强制不换行
+    3.固定高度
+    4.隐藏超出部分
+    5.显示“……”
+  */
+  display: inline-block;
+  white-space: nowrap; 
+  width: 100%; 
+  overflow: hidden;
+  text-overflow:ellipsis;
+}

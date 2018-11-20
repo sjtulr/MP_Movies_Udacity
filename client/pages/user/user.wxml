@@ -1,0 +1,20 @@
+<!--pages/user/user.wxml-->
+<view class='user-title'> 收 藏 的 影 评 </view>
+
+<view class='movie-list'>
+  <view class='movie-card' wx:key='{{item.id}}' wx:for='{{starComment}}' bindtap='commentDetail' data-id='{{item.comment_id}}'>
+    <image class='movie-image' mode='widthFix' src='{{item.movie_image}}'></image>
+    <view class='movie-info'>
+      <view class='movie-name'>{{item.movie_name}}</view>
+      <view class='movie-type'>{{item.content}}</view>
+      <view class='comment-card'>
+        <image class='comment-avator' src='{{item.avatar}}'></image>
+        <view class='comment-text'>{{item.username}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='opr-cnt'>
+  <view class='opr-back' bindtap='toList'>回到首页</view>
+</view>

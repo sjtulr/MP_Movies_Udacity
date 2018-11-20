@@ -1,0 +1,16 @@
+<!--pages/home/home.wxml-->
+<view class='movie-card'>
+  <image class='movie-image' mode='widthFix' src='{{movie.image}}' bindtap='bindMovie' data-id='{{movie.id}}'></image>
+  <view class='movie-name'>{{movie.title}}</view>
+  <view class='comment-card' bindtap='bindComment' data-id='{{comment.id}}'>
+    <image class='comment-avator' src='{{comment.avatar}}'></image>
+    <view class='comment-text'>{{comment.username}} 向你推荐了一部电影</view>
+  </view>
+</view>
+
+<view class='split'></view>
+
+<view class='opr-cnt'>
+  <view class='opr-list' bindtap='toList'>热门</view>
+  <view class='opr-user' bindtap='toUser'>我的</view>
+</view>

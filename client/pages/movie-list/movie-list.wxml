@@ -1,0 +1,11 @@
+<!--pages/movie-list/movie-list.wxml-->
+
+<view class='movie-list'>
+  <view class='movie-card' wx:key='{{item.id}}' wx:for='{{movieList}}' data-id='{{item.id}}' bindtap='bindMovie'>
+    <image class='movie-image' mode='widthFix' src='{{item.image}}'></image>
+    <view class='movie-info'>
+      <view class='movie-name'>{{item.title}}</view>
+      <view class='movie-type'>类型：{{item.category}}</view>
+    </view>
+  </view>
+</view>

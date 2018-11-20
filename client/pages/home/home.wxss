@@ -1,0 +1,61 @@
+/* pages/home/home.wxss */
+.movie-card {
+  margin: 30rpx 50rpx;
+}
+
+.movie-image {
+  width: 520rpx;
+  display: block;
+  margin: auto;
+}
+
+.movie-name {
+  font-size: 46rpx;
+  text-align: center;
+  margin: 30rpx 0;
+  font-weight: bold;
+  color: rgb(68, 68, 68);
+}
+
+.comment-card {
+  display: flex;
+  margin: 50rpx 40rpx 0 60rpx;
+}
+
+.comment-avator {
+  height: 100rpx;
+  width: 100rpx;
+  border-radius: 50%;
+}
+
+.comment-text {
+  font-size: 36rpx;
+  margin: 25rpx 20rpx;
+  color: rgb(128, 128, 128);
+}
+
+.split {
+  height: 100rpx;
+}
+
+.opr-cnt {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+}
+
+.opr-list,
+.opr-user {
+  flex: 1;
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: #34373D;
+  font-weight: bold;
+  background: white;
+  border: 1rpx solid rgb(221, 221, 221)
+}

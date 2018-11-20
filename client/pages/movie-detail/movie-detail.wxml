@@ -1,0 +1,11 @@
+<!--pages/movie-detail/movie-detatil.wxml-->
+
+<view class='detail-card'>
+  <image class='detail-image' mode='widthFix' src='{{movie.image}}'></image>
+  <view class='detail-name'>{{movie.title}}</view>
+  <view class='detail-desc'>{{movie.description}}</view>
+  <view class='detail-opt'>
+    <view class='opt-see-comment' bindtap='seeComment'>查看影评</view>
+    <view class='opt-add-comment' bindtap='addComment'>添加影评</view>
+  </view>
+</view>
