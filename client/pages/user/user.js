@@ -1,6 +1,8 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config.js')
 
+var app = getApp()
+
 // pages/user/user.js
 Page({
 
@@ -31,7 +33,9 @@ Page({
       type: '动作'
     },
     ],
-    starComment: []
+    commentList: [],
+    starComment: [],
+    pushComment: [],
   },
 
   // 获取收藏列表
@@ -60,12 +64,14 @@ Page({
                     movie_name: '',
                     movie_image: '',
                     content: '',
+                    voice: '',
                   }
                   comment.comment_id = result1.data.data[0].id
                   comment.movie_id = result1.data.data[0].movie_id
                   comment.username = result1.data.data[0].username
                   comment.avatar = result1.data.data[0].avatar
                   comment.content = result1.data.data[0].content
+                  comment.voice = result1.data.data[0].voice
                   comment.movie_name = result2.data.data[0].title
                   comment.movie_image = result2.data.data[0].image
                   commentList.push(comment)
@@ -76,6 +82,56 @@ Page({
                 fail: result => {
                   console.log('error!')
                 }
+              })
+            },
+            fail: result => {
+              console.log('error!')
+            }
+          })
+        }
+      },
+      fail: result => {
+        console.log('error!')
+      }
+    })
+  },
+
+  // 获取发布列表
+  getPush(user) {
+    var commentList = []
+    var movieList = []
+    var pushList = []
+    var that = this
+    qcloud.request({
+      url: config.service.commentPush + user,
+      success: result1 => {
+        let pushList = result1.data.data
+        for (var i = 0; i < pushList.length; i++) {
+          let commentDetail = result1.data.data[i]
+          qcloud.request({
+            url: config.service.movieDetail + result1.data.data[i].movie_id,
+            success: result2 => {
+              var comment = {
+                comment_id: '',
+                movie_id: '',
+                avatar: '',
+                username: '',
+                movie_name: '',
+                movie_image: '',
+                content: '',
+                voice: '',
+              }
+              comment.comment_id = commentDetail.id
+              comment.movie_id = commentDetail.movie_id
+              comment.username = commentDetail.username
+              comment.avatar = commentDetail.avatar
+              comment.content = commentDetail.content
+              comment.voice = commentDetail.voice
+              comment.movie_name = result2.data.data[0].title
+              comment.movie_image = result2.data.data[0].image
+              commentList.push(comment)
+              that.setData({
+                pushComment: commentList
               })
             },
             fail: result => {
@@ -108,7 +164,8 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getStar('sjtulr')
+    this.getStar(app.globalData.user)
+    this.getPush(app.globalData.user)
   },
 
   /**
@@ -143,7 +200,9 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    this.getStar(app.globalData.user)
+    this.getPush(app.globalData.user)
+    wx.stopPullDownRefresh()
   },
 
   /**

@@ -1,8 +1,20 @@
 <!--pages/comment-write/comment-write.wxml-->
-<button bindtap='startRecode'>开始录音</button>  
-<button bindtap='play'>播放录音</button>  
-<button bindtap='endRecode'>停止录音</button>
+<view class='detail-card'>
+  <image class='detail-image' mode='widthFix' src='{{movie.image}}'></image>
+  <view class='detail-name'>{{movie.title}}</view>
+  <view class='comment-card'>
+    <image class='comment-avator' src='{{avatar}}'></image>
+    <view class='comment-text'>{{username}}的影评</view>
+  </view>
+  <view wx:if="{{commentType === 1}}" class='detail-opt'>
+    <view class='opt-startRecordMp3' bindtap='startRecordMp3'>开始录音</view>
+    <view class='opt-stopRecord' bindtap='stopRecord'>录音结束</view>
+  </view>
+  <view wx:else class='comment-add'>
+    <textarea class='comment-content' placeholder-class='comment-placeholder' placeholder='请填写你的影评' auto-focus maxlength='255' bindinput='onInputDesc'></textarea>
+  </view>
+</view>
 
-<button bindtap='chooseImage'>选择图片</button>
-
-<button bindtap='uploadImage'>上传图片</button>
+<view class='opr-cnt'>
+  <view class='opr-preview' bindtap='previewComment'>预览影评</view>
+</view>

@@ -81,3 +81,14 @@
   background: white;
   border: 1rpx solid rgb(221, 221, 221)
 }
+
+.comment-voice {
+  margin-top: 40rpx;
+  margin-left: 10rpx;
+  text-align: center;
+  padding: 10rpx;
+  width: 220rpx;
+  font-size: 30rpx;
+  border: 1rpx solid rgb(170, 170, 170);
+  border-radius: 10rpx;
+}

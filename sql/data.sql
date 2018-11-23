@@ -14,6 +14,7 @@ CREATE TABLE `comment` (
   `username` varchar(255) DEFAULT NULL, 
   `avatar` varchar(255) NOT NULL,
   `content` varchar(511) CHARACTER SET utf8 DEFAULT NULL,
+  `voice` varchar(255) NOT NULL,
   `movie_id` int(11) NOT NULL,
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -29,36 +30,18 @@ CREATE TABLE `star` (
 SET @IMAGE_BASE_URL = "https://movie-1256679302.cos.ap-shanghai.myqcloud.com/"; -- FOR EXAMPLE: https://*****.ap-shanghai.myqcloud.com/\
 
 INSERT INTO `star` (`id`, `user`, `comment_id`) VALUES
-(1, 'sjtulr', 2),
-(2, 'sjtulr', 4),
-(3, 'sjtulr', 6),
-(4, 'sjtulr', 10),
-(5, 'sjtulr', 16),
-(6, 'yxq', 9),
-(7, 'yxq', 15),
-(8, 'ch', 7);
+(1, 'sjtulr', 2);
 
-INSERT INTO `comment` (`id`, `user`, `username`, `avatar`, `content`, `movie_id`) VALUES
-(1, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 1),
-(2, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 1),
-(3, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 1),
-(4, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '影片讲述英国首相丘吉尔在作为首相期间面临的最重要的审判。', 2),
-(5, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '影片讲述英国首相丘吉尔在作为首相期间面临的最重要的审判。', 2),
-(6, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '到最后他们之间的矛盾能否化解，乐队又能否继续走红呢？', 3),
-(7, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 4),
-(8, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 5),
-(9, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 7),
-(10, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 8),
-(11, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 9),
-(12, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 10),
-(13, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 11),
-(14, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 12),
-(15, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 13),
-(16, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 14),
-(17, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 15),
-(18, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 15),
-(19, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 15),
-(20, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 15);
+INSERT INTO `comment` (`id`, `user`, `username`, `avatar`, `content`, `voice`, `movie_id`) VALUES
+(1, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结。', 0, 1),
+(2, 'yxq', '杨孝奇', CONCAT(@IMAGE_BASE_URL, 'p449619623.jpg'), '影片讲述英国首相丘吉尔在作为首相期间面临的最重要的审判。', 0, 3),
+(3, 'sjtulr', '李睿', CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), 0, 'https://audio-1256679302.cos.ap-shanghai.myqcloud.com/1542952364417-hFLZqbl5r.webm', 3),
+(4, 'ming', '小明', CONCAT(@IMAGE_BASE_URL, 'p2496940327.jpg'), '彼此对生活的感想，两人了解越加深刻。', 0, 7),
+(5, 'hong', '小红', CONCAT(@IMAGE_BASE_URL, 'p863416171.jpg'), '可是价格高昂，接受的人不多。就算他多努力都无法提供一个良好的生活环境给妻儿。', 0, 9),
+(6, 'summer', '夏凉', CONCAT(@IMAGE_BASE_URL, 'p449619623.jpg'), '在以严格著称的学院里，兰乔是个非常与众不同的学生，他不死记硬背，甚至还公然顶撞校长“病毒”（波曼·伊拉尼 Boman Irani 饰），质疑他的教学方法。他不仅鼓动法兰与拉杜去勇敢追寻理想', 0, 11),
+(7, 'hong', '小红', CONCAT(@IMAGE_BASE_URL, 'p863416171.jpg'), 0, 'https://audio-1256679302.cos.ap-shanghai.myqcloud.com/1542952668784-EOVl-RXts.webm', 12),
+(8, 'qiu', '秋收', CONCAT(@IMAGE_BASE_URL, 'p2206088801.jpg'), '星际穿越的观影体验特别棒', 0, 15),
+(9, 'dream', '冬梦', CONCAT(@IMAGE_BASE_URL, 'p2206088801.jpg'), '星际穿越就是好看', 0, 15);
 
 INSERT INTO `movies` (`id`, `image`, `title`, `category`, `description`) VALUES
 (1, CONCAT(@IMAGE_BASE_URL, 'p2517753454.jpg'), '复仇者联盟3：无限战争', '动作 / 科幻 / 奇幻 / 冒险', '《复仇者联盟3：无限战争》是漫威电影宇宙10周年的历史性集结，将为影迷们带来史诗版的终极对决。面对灭霸突然发起的闪电袭击，复仇者联盟及其所有超级英雄盟友必须全力以赴，才能阻止他对全宇宙造成毁灭性的打击。'),

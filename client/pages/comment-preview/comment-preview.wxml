@@ -1,2 +1,15 @@
 <!--pages/comment-preview/comment-preview.wxml-->
-<text>pages/comment-preview/comment-preview.wxml</text>
+<view class='detail-card'>
+  <image class='detail-image' mode='widthFix' src='{{movie.image}}'></image>
+  <view class='detail-name'>{{movie.title}}</view>
+  <view class='comment-card'>
+    <image class='comment-avator' src='{{avatar}}'></image>
+    <view class='comment-text'>{{username}}的影评</view>
+  </view>
+  <view wx:if="{{commentType === 1}}" class='voice-opt' bindtap='playRecord'>播放影评</view>
+  <view wx:else class='detail-desc'>{{commentText}}</view>
+  <view class='detail-opt'>
+    <view class='opt-star-comment' bindtap='rewrite'>重新编辑</view>
+    <view class='opt-add-comment' bindtap='pushComment'>发布影评</view>
+  </view>
+</view>

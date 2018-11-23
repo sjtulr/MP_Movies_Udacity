@@ -6,19 +6,17 @@ module.exports = {
    * 添加评论
    */
   add: async ctx => {
-    let user = ctx.state.$wxInfo.userinfo.openId
-    let username = ctx.state.$wxInfo.userinfo.nickName
-    let avatar = ctx.state.$wxInfo.userinfo.avatarUrl
+    let user = ctx.request.body.user
+    let username = ctx.request.body.username
+    let avatar = ctx.request.body.avatar
 
     let movieId = +ctx.request.body.movie_id
     let content = ctx.request.body.content || null
+    let voice = ctx.request.body.voice || null
 
-    if (!isNaN(movieId)) {
-      await DB.query('INSERT INTO comment(user, username, avatar, content, movie_id) VALUES (?, ?, ?, ?, ?, ?)', [user, username, avatar, content, movieId])
-    }
+    await DB.query('INSERT INTO comment(user, username, avatar, content, voice, movie_id) VALUES (?, ?, ?, ?, ?, ?)', [user, username, avatar, content, voice, movieId])
 
-    ctx.state.data = {}
-    console.log(ctx)
+    ctx.state.data = {msg: '添加成功'}
   },
 
   /**

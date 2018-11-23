@@ -27,6 +27,18 @@
   color: rgba(0, 0, 0, 0.795);
 }
 
+.voice-opt {
+  width: 200rpx;
+  text-align: center;
+  margin: 120rpx auto;
+  margin-bottom: 200rpx;
+  padding: 15rpx;
+  font-size: 32rpx;
+  border: 2rpx solid rgba(0, 0, 0, 0.425);
+  color: rgba(0, 0, 0, 0.699);
+  border-radius: 8rpx; 
+}
+
 .detail-opt {
   margin: 50rpx auto;
   margin-top: 120rpx;

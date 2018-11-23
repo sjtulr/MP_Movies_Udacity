@@ -2,6 +2,8 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config.js')
 
+var app = getApp();
+
 Page({
 
   /**
@@ -13,7 +15,7 @@ Page({
       avator: '/images/p2517753454.jpg',
       comment: '徐妍 给你推荐了一部电影',
     },
-    comment: {}
+    comment: null,
   },
 
   // 获取影片详情
@@ -36,9 +38,15 @@ Page({
     qcloud.request({
       url: config.service.commentList + id,
       success: result => {
-        this.setData({
-          comment: result.data.data[0]
-        })
+        if (result.data.data.length > 0) {
+          this.setData({
+            comment: result.data.data[0]
+          })
+        } else {
+          this.setData({
+            comment: {id: -1} 
+          })
+        }
       },
       fail: result => {
         console.log('error!')
@@ -66,10 +74,71 @@ Page({
     })
   },
   
+  // 点击评论
   bindComment(event) {
     let id = event.currentTarget.dataset.id
     wx.navigateTo({
       url: '/pages/comment-detail/comment-detail?id=' + id
+    })
+  },
+
+  // 点击空评论
+  bindComment0 () {
+    let id = this.data.movie.id
+    app.globalData.commentMovie = this.data.movie.id
+    wx.showModal({
+      title: '撰写影评',
+      content: '请选择想要发布的影评形式',
+      showCancel: true,
+      cancelText: '音频',
+      cancelColor: 'green',
+      confirmText: '文字',
+      confirmColor: '',
+      success: function (res) {
+        if (res.confirm) {
+          app.globalData.commentType = 0;
+          wx.navigateTo({
+            url: '/pages/comment-write/comment-write?id=' + id,
+          })
+        } else if (res.cancel) {
+          app.globalData.commentType = 1;
+          wx.navigateTo({
+            url: '/pages/comment-write/comment-write?id=' + id,
+          })
+        }
+      },
+      fail: function (res) {
+        console.log(res)
+      },
+      complete: function (res) { },
+    })
+  },
+
+  // 获取某一条收藏信息
+  getStarDetail(comment_id) {
+    let user = app.globalData.user
+    let commentId = comment_id
+    qcloud.request({
+      url: config.service.starDetail,
+      method: 'PUT',
+      data: {
+        user: user,
+        comment_id: commentId
+      },
+      success: result => {
+        console.log(result.data.data[0])
+        let starId = result.data.data[0].id
+        qcloud.request({
+          url: config.service.starCancel,
+          method: 'PUT',
+          data: {
+            star_id: starId
+          },
+          success: result => {
+            console.log(result)
+          }
+        })
+      }
     })
   },
 
@@ -114,7 +183,10 @@ Page({
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
-  
+    var id = Math.floor(Math.random() * 15 + 1)
+    this.getMovie(id)
+    this.getCommentList(id)
+    wx.stopPullDownRefresh()
   },
 
   /**

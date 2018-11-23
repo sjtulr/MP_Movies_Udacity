@@ -17,6 +17,16 @@
   color: rgb(68, 68, 68);
 }
 
+.comment0 {
+  border: 1rpx solid rgb(202, 202, 202);
+  margin: 55rpx auto;
+  padding: 15rpx 0;
+  text-align: center;
+  border-radius: 10rpx;
+  font-size: 36rpx;
+  color: rgb(126, 124, 124);
+}
+
 .comment-card {
   display: flex;
   margin: 50rpx 40rpx 0 60rpx;

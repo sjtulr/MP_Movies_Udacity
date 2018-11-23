@@ -6,7 +6,25 @@
     <image class='movie-image' mode='widthFix' src='{{item.movie_image}}'></image>
     <view class='movie-info'>
       <view class='movie-name'>{{item.movie_name}}</view>
-      <view class='movie-type'>{{item.content}}</view>
+      <view wx:if="{{item.voice.length < 10}}" class='movie-type'>{{item.content}}</view>
+      <view wx:else class='comment-voice'>语音影评</view>
+      <view class='comment-card'>
+        <image class='comment-avator' src='{{item.avatar}}'></image>
+        <view class='comment-text'>{{item.username}}</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<view class='user-title'> 发 布 的 影 评 </view>
+
+<view class='movie-list'>
+  <view class='movie-card' wx:key='{{item.id}}' wx:for='{{pushComment}}' bindtap='commentDetail' data-id='{{item.comment_id}}'>
+    <image class='movie-image' mode='widthFix' src='{{item.movie_image}}'></image>
+    <view class='movie-info'>
+      <view class='movie-name'>{{item.movie_name}}</view>
+      <view wx:if="{{item.voice.length < 10}}" class='movie-type'>{{item.content}}</view>
+      <view wx:else class='comment-voice'>语音影评</view>
       <view class='comment-card'>
         <image class='comment-avator' src='{{item.avatar}}'></image>
         <view class='comment-text'>{{item.username}}</view>

@@ -2,118 +2,101 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config.js')
 
+var app = getApp();
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    recodePath: '',
-    isRecode: false,
-    product: {},
-    commentValue: '',
-    commentImages: [],
+    movie: {},
+    content: '',
+    avatar: app.globalData.avatar,
+    username: app.globalData.username,
   },
 
-  uploadImage(cb) {
-    let commentImages = this.data.commentImages
-    console.log(commentImages[0])
-
-    wx.uploadFile({
-      url: 'https://puazbmrk.qcloud.la/weapp/upload',
-      filePath: commentImages[0],
-      name: 'file',
-      success: res => {
-        console.log(res)
-      },
-      fail: () => {
-        length--
-      }
-    })
-  },
-
-  chooseImage() {
-    wx.chooseImage({
-      count: 3,
-      sizeType: ['compressed'],
-      sourceType: ['album', 'camera'],
-      success: res => {
-
-        let commentImages = res.tempFilePaths
-
+  // 获取影片详情
+  getMovie(id) {
+    qcloud.request({
+      url: config.service.movieDetail + id,
+      success: result => {
         this.setData({
-          commentImages
+          movie: result.data.data[0]
         })
-        console.log(commentImages)
-
       },
-    })
-  },
-
-  play: function () {
-    //播放声音文件  
-    wx.playVoice({
-      filePath: voice
-    })
-  },
-
-  startRecode: function () {
-    var s = this;
-    wx.startRecord({
-      success: function (res) {
-        console.log(res);
-        console.log("start");        
-        var tempFilePath = res.tempFilePath;
-        s.setData({ recodePath: tempFilePath, isRecode: true });
-      },
-      fail: function (res) {
-        console.log("fail");
-        console.log(res);
-        //录音失败
+      fail: result => {
+        console.log('error!')
       }
-    });
+    })
   },
 
-  endRecode: function () {//结束录音 
-    var s = this;
-    console.log("end");
-    wx.stopRecord();
-    s.setData({ isRecode: false });
-    wx.showToast();
-    setTimeout(function () {
-      console.log(s.data.recodePath);
-      wx.uploadFile({
-        url: config.service.uploadUrl,
-        filePath: s.data.recodePath,
-        name: 'file',
-        header: {
-          'content-type': 'multipart/form-data'
-        },
-        success: function (res) {
-          console.log(res)
-        },
-        fail: function (res) {
-          console.log(res);
-          wx.showModal({
-            title: '提示',
-            content: "网络请求失败，请确保网络是否正常",
-            showCancel: false,
-            success: function (res) {
-            }
-          });
-        }
-      });
-    }, 1000)
-
+  // 撰写评论
+  onInputDesc(event) {
+    this.setData({
+      content: event.detail.value.trim()
+    })
+    app.globalData.commentText = event.detail.value.trim()
   },
 
-
+  // 预览影评
+  previewComment() {
+    wx.navigateTo({
+      url: '/pages/comment-preview/comment-preview?id=' + 4,
+    })
+  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-  
+    this.getMovie(app.globalData.commentMovie)
+    this.setData({
+      commentType: app.globalData.commentType
+    })
+    var that = this;
+    this.recorderManager = wx.getRecorderManager();
+    this.recorderManager.onError(function () {
+      that.tip("录音失败！")
+    });
+    this.recorderManager.onStop(function (res) {
+      that.setData({
+        src: res.tempFilePath
+      })
+      that.tip("录音完成！")
+      setTimeout(function () {
+        console.log(res.tempFilePath);
+        wx.uploadFile({
+          url: config.service.uploadUrl,
+          filePath: res.tempFilePath,
+          name: 'file',
+          header: {
+            'content-type': 'multipart/form-data'
+          },
+          success: function (res) {
+            console.log(res.data)
+            let data = JSON.parse(res.data)
+            console.log(data.data.imgUrl)
+            app.globalData.commentPath = data.data.imgUrl
+          },
+          fail: function (res) {
+            console.log(res);
+            wx.showModal({
+              title: '提示',
+              content: "网络请求失败，请确保网络是否正常",
+              showCancel: false,
+              success: function (res) {
+              }
+            });
+          }
+        });
+      }, 1000)
+    });
+
+    this.innerAudioContext = wx.createInnerAudioContext();
+    this.innerAudioContext.onError((res) => {
+      that.tip("播放录音失败！")
+    })
   },
 
   /**
@@ -162,5 +145,48 @@ Page({
    */
   onShareAppMessage: function () {
   
+  },
+
+  //...........................录音部分
+
+  /**
+  * 提示
+  */
+  tip: function (msg) {
+    wx.showModal({
+      title: '提示',
+      content: msg,
+      showCancel: false
+    })
+  }
+
+  /**
+   * 录制mp3音频
+  */
+  , startRecordMp3: function () {
+    this.recorderManager.start({
+      format: 'mp3'
+    });
+  }
+
+  /**
+   * 停止录音
+   */
+  , stopRecord: function () {
+    this.recorderManager.stop()
+  }
+
+  /**
+   * 播放录音
+   */
+  , playRecord: function () {
+    var that = this;
+    var src = this.data.src;
+    if (src == '') {
+      this.tip("请先录音！")
+      return;
+    }
+    this.innerAudioContext.src = this.data.src;
+    this.innerAudioContext.play()
   }
 })

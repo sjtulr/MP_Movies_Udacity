@@ -40,6 +40,18 @@ var config = {
 
       // 收藏影评
       addComment: `${host}/weapp/star`,
+
+      // 添加影评
+      commentAdd: `${host}/weapp/commentadd`,
+      
+      // 获取发布列表
+      commentPush: `${host}/weapp/pushlist/`,
+
+      // 取消收藏
+      starCancel: `${host}/weapp/starcancel`,
+
+      // 获取某一条收藏
+      starDetail: `${host}/weapp/stardetail`,
     }
 };
 

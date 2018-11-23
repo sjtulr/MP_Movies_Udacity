@@ -44,3 +44,30 @@
   overflow: hidden;
   text-overflow:ellipsis;
 }
+
+.comment-voice {
+  margin-top: 30rpx;
+  margin-left: 40rpx;
+  text-align: center;
+  padding: 10rpx;
+  width: 220rpx;
+  font-size: 30rpx;
+  border: 1rpx solid rgb(170, 170, 170);
+  border-radius: 10rpx;
+}
+
+.comment-empty {
+  border: 5rpx solid rgb(212, 212, 212);
+  border-radius: 5%;
+  margin: 100rpx 30rpx;
+  height: 300rpx;
+  padding-top: 100rpx;
+}
+
+.empty-text {
+  color: rgb(212, 212, 212);
+  font-weight: bold;
+  font-size: 40rpx;
+  margin: 30rpx auto;
+  text-align: center;
+}

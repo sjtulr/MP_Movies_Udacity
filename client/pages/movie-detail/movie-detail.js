@@ -2,6 +2,8 @@
 const qcloud = require('../../vendor/wafer2-client-sdk/index')
 const config = require('../../config.js')
 
+var app = getApp();
+
 Page({
 
   /**
@@ -34,11 +36,35 @@ Page({
     })
   },
 
-  // 添加影评
+  // 撰写影评
   addComment() {
     let id = this.data.movie.id
-    wx.navigateTo({
-      url: '/pages/comment-write/comment-write?id=' + id,
+    app.globalData.commentMovie = this.data.movie.id
+    wx.showModal({
+      title: '撰写影评',
+      content: '请选择想要发布的影评形式',
+      showCancel: true,
+      cancelText: '音频',
+      cancelColor: 'green',
+      confirmText: '文字',
+      confirmColor: '',
+      success: function (res) {
+        if (res.confirm) {
+          app.globalData.commentType = 0;
+          wx.navigateTo({
+            url: '/pages/comment-write/comment-write?id=' + id,
+          })
+        } else if (res.cancel) {
+          app.globalData.commentType = 1;
+          wx.navigateTo({
+            url: '/pages/comment-write/comment-write?id=' + id,
+          })
+        }
+      },
+      fail: function (res) {
+        console.log(res)
+      },
+      complete: function (res) { },
     })
   },
 

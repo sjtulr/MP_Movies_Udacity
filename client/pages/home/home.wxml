@@ -2,7 +2,8 @@
 <view class='movie-card'>
   <image class='movie-image' mode='widthFix' src='{{movie.image}}' bindtap='bindMovie' data-id='{{movie.id}}'></image>
   <view class='movie-name'>{{movie.title}}</view>
-  <view class='comment-card' bindtap='bindComment' data-id='{{comment.id}}'>
+  <view wx:if="{{comment.id === -1}}" class='comment0' bindtap='bindComment0'>还没有人为本片评价, 点击添加影评</view>
+  <view wx:else class='comment-card' bindtap='bindComment' data-id='{{comment.id}}'>
     <image class='comment-avator' src='{{comment.avatar}}'></image>
     <view class='comment-text'>{{comment.username}} 向你推荐了一部电影</view>
   </view>
