@@ -10,6 +10,8 @@ var config = {
     // 下面的地址配合云端 Demo 工作
     service: {
       host,
+      // 拉取用户信息
+      user: `${host}/weapp/user`,
 
       // 登录地址，用于建立会话
       loginUrl: `${host}/weapp/login`,

@@ -1,10 +1,10 @@
 {
   "pages": [
+    "pages/home/home",
     "pages/movie-list/movie-list",
     "pages/user/user",
     "pages/comment-detail/comment-detail",
     "pages/comment-list/comment-list",
-    "pages/home/home",
     "pages/movie-detail/movie-detail",
     "pages/comment-preview/comment-preview",
     "pages/comment-write/comment-write"

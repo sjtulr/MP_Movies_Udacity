@@ -12,8 +12,8 @@ Page({
   data: {
     movie: {},
     content: '',
-    avatar: app.globalData.avatar,
-    username: app.globalData.username,
+    avatar: '',
+    username: '',
   },
 
   // 获取影片详情
@@ -52,7 +52,9 @@ Page({
   onLoad: function (options) {
     this.getMovie(app.globalData.commentMovie)
     this.setData({
-      commentType: app.globalData.commentType
+      commentType: app.globalData.commentType,
+      username: app.globalData.username,
+      avatar: app.globalData.avatar,
     })
     var that = this;
     this.recorderManager = wx.getRecorderManager();

@@ -45,21 +45,21 @@ router.get('/comment/:id', controllers.comment.list)
 router.get('/commentdetail/:id', controllers.comment.detail)
 
 // PUT 添加影评
-router.put('/commentadd', controllers.comment.add)
+router.put('/commentadd', validationMiddleware, controllers.comment.add)
 
 // GET 获取收藏列表
-router.get('/star/:user', controllers.star.star)
+router.get('/star/:user', validationMiddleware, controllers.star.star)
 
 // PUT 收藏影评
-router.put('/star', controllers.star.add)
+router.put('/star', validationMiddleware, controllers.star.add)
 
 // GET 获取发布列表
-router.get('/pushlist/:user', controllers.star.list)
+router.get('/pushlist/:user', validationMiddleware, controllers.star.list)
 
 // PUT 取消收藏
-router.put('/starcancel', controllers.star.cancel)
+router.put('/starcancel', validationMiddleware, controllers.star.cancel)
 
 // PUT 获取某一条收藏
-router.put('/stardetail', controllers.star.detail)
+router.put('/stardetail', validationMiddleware, controllers.star.detail)
 
 module.exports = router

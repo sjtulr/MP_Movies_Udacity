@@ -47,47 +47,53 @@ Page({
     qcloud.request({
       url: config.service.starList + user,
       success: result => {
-        let starList = result.data.data
-        for(var i=0; i<starList.length; i++) {
-          let id = starList[i].comment_id
-          qcloud.request({
-            url: config.service.commentDetail + id,
-            success: result1 => {
-              qcloud.request({
-                url: config.service.movieDetail + result1.data.data[0].movie_id,
-                success: result2 => {
-                  var comment = {
-                    comment_id: '',
-                    movie_id: '',
-                    avatar: '',
-                    username: '',
-                    movie_name: '',
-                    movie_image: '',
-                    content: '',
-                    voice: '',
-                  }
-                  comment.comment_id = result1.data.data[0].id
-                  comment.movie_id = result1.data.data[0].movie_id
-                  comment.username = result1.data.data[0].username
-                  comment.avatar = result1.data.data[0].avatar
-                  comment.content = result1.data.data[0].content
-                  comment.voice = result1.data.data[0].voice
-                  comment.movie_name = result2.data.data[0].title
-                  comment.movie_image = result2.data.data[0].image
-                  commentList.push(comment)
-                  that.setData ({
-                    starComment: commentList
-                  })
-                },
-                fail: result => {
-                  console.log('error!')
-                }
-              })
-            },
-            fail: result => {
-              console.log('error!')
-            }
+        if (result.data.data.length < 1) {
+          that.setData({
+            starComment: []
           })
+        } else {
+          let starList = result.data.data
+          for (var i = 0; i < starList.length; i++) {
+            let id = starList[i].comment_id
+            qcloud.request({
+              url: config.service.commentDetail + id,
+              success: result1 => {
+                qcloud.request({
+                  url: config.service.movieDetail + result1.data.data[0].movie_id,
+                  success: result2 => {
+                    var comment = {
+                      comment_id: '',
+                      movie_id: '',
+                      avatar: '',
+                      username: '',
+                      movie_name: '',
+                      movie_image: '',
+                      content: '',
+                      voice: '',
+                    }
+                    comment.comment_id = result1.data.data[0].id
+                    comment.movie_id = result1.data.data[0].movie_id
+                    comment.username = result1.data.data[0].username
+                    comment.avatar = result1.data.data[0].avatar
+                    comment.content = result1.data.data[0].content
+                    comment.voice = result1.data.data[0].voice
+                    comment.movie_name = result2.data.data[0].title
+                    comment.movie_image = result2.data.data[0].image
+                    commentList.push(comment)
+                    that.setData({
+                      starComment: commentList
+                    })
+                  },
+                  fail: result => {
+                    console.log('error!')
+                  }
+                })
+              },
+              fail: result => {
+                console.log('error!')
+              }
+            })
+          }
         }
       },
       fail: result => {
@@ -179,7 +185,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    this.getStar(app.globalData.user)
+    this.getPush(app.globalData.user)
   },
 
   /**

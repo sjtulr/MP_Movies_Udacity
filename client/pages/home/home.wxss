@@ -1,4 +1,30 @@
 /* pages/home/home.wxss */
+
+.unlogin-title {
+  border: 5rpx solid rgb(212, 212, 212);
+  border-radius: 5%;
+  margin: 100rpx 40rpx;
+  height: 150rpx;
+  padding-top: 100rpx;
+  text-align: center;
+  font-size: 30rpx;
+  color: rgb(112, 112, 112);
+  background-color: rgb(255, 255, 255);
+}
+
+.unlogin-btn {
+  margin: 200rpx auto 0;
+  width: 250rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  background: #F5E069;
+  border-radius: 10rpx;
+  font-size: 30rpx;
+  text-align: center;
+  color: #34373D;
+  font-weight: bold;
+}
+
 .movie-card {
   margin: 30rpx 50rpx;
 }

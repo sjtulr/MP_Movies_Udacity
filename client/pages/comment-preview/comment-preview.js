@@ -37,9 +37,7 @@ Page({
 
   // 发布影评
   pushComment () {
-    console.log('1')
     if (app.globalData.commentType === 0) {
-      console.log('0')
       qcloud.request({
         url: config.service.commentAdd,
         method: 'PUT',
@@ -52,7 +50,6 @@ Page({
           movie_id: app.globalData.commentMovie,
         },
         success: result => {
-          console.log(result)
           wx.showModal({
             title: '提示',
             content: '影评发布成功！',

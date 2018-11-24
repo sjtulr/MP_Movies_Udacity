@@ -16,6 +16,9 @@ Page({
       comment: '徐妍 给你推荐了一部电影',
     },
     comment: null,
+    loginStatus: 0,
+    userInfo: null,
+    locationAuthType: app.data.locationAuthType
   },
 
   // 获取影片详情
@@ -142,10 +145,35 @@ Page({
     })
   },
 
+  // 微信登录
+  onTapLogin: function () {
+    app.login({
+      success: ({ userInfo }) => {
+        app.globalData.loginStatus = 1
+        app.globalData.username = userInfo.nickName
+        app.globalData.avatar = userInfo.avatarUrl
+        app.globalData.user = userInfo.openId
+        this.setData({
+          userInfo,
+          locationAuthType: app.data.locationAuthType,
+          loginStatus: 1
+        })
+      },
+      error: () => {
+        this.setData({
+          locationAuthType: app.data.locationAuthType
+        })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      loginStatus: app.globalData.loginStatus
+    })
     var id = Math.floor(Math.random() * 15 + 1)
     this.getMovie(id)
     this.getCommentList(id)
@@ -162,7 +190,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  
+    // 同步授权状态
+    this.setData({
+      locationAuthType: app.data.locationAuthType
+    })
+    app.checkSession({
+      success: ({ userInfo }) => {
+        app.globalData.loginStatus = 1
+        app.globalData.username = userInfo.nickName
+        app.globalData.avatar = userInfo.avatarUrl
+        app.globalData.user = userInfo.openId
+        this.setData({
+          userInfo,
+          loginStatus: 1
+        })
+      }
+    })
   },
 
   /**

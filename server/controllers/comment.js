@@ -6,9 +6,9 @@ module.exports = {
    * 添加评论
    */
   add: async ctx => {
-    let user = ctx.request.body.user
-    let username = ctx.request.body.username
-    let avatar = ctx.request.body.avatar
+    let user = ctx.state.$wxInfo.userinfo.openId
+    let username = ctx.state.$wxInfo.userinfo.nickName
+    let avatar = ctx.state.$wxInfo.userinfo.avatarUrl
 
     let movieId = +ctx.request.body.movie_id
     let content = ctx.request.body.content || null
