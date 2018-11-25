@@ -10,7 +10,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    movie: null
+    movie: null,
+    publishStatus: 0,
+    myComment: {},
   },
 
   // 获取影片详情
@@ -28,11 +30,43 @@ Page({
     })
   },
 
+  // 获取评论列表
+  getCommentList(id) {
+    qcloud.request({
+      url: config.service.commentList + id,
+      success: result => {
+        let list = result.data.data
+        console.log(list)
+        for (var i = 0; i < list.length; i++) {
+          if (list[i].user === app.globalData.user) {
+            let publishStatus = 1;
+            this.setData({
+              myComment: list[i],
+              publishStatus: 1
+            })
+          }
+        }
+      },
+      fail: result => {
+        console.log('error!')
+      }
+    })
+  },
+
   // 查看影评
   seeComment () {
     let id = this.data.movie.id
     wx.navigateTo({
       url: '/pages/comment-list/comment-list?id=' + id,
+    })
+  },
+
+  // 我的影评
+  // 查看评论详情
+  commentDetail(event) {
+    let id = this.data.myComment.id
+    wx.navigateTo({
+      url: '/pages/comment-detail/comment-detail?id=' + id
     })
   },
 
@@ -73,6 +107,7 @@ Page({
    */
   onLoad: function (options) {
     this.getMovie(options.id)
+    this.getCommentList(options.id)
   },
 
   /**

@@ -13,6 +13,7 @@ Page({
     comment: {},
     movie: {},
     starId: 0,
+    publishStatus: 0,
   },
 
   // 获取评论详情
@@ -20,6 +21,12 @@ Page({
     qcloud.request({
       url: config.service.commentDetail + id,
       success: result => {
+        console.log(result)
+        if (result.data.data[0].user === app.globalData.user) {
+          this.setData({
+            publishStatus: 1,
+          })
+        }
         this.setData({
           comment: result.data.data[0]
         })
@@ -134,6 +141,12 @@ Page({
         console.log(res)
       },
       complete: function (res) { },
+    })
+  },
+
+  toList() {
+    wx.navigateTo({
+      url: '/pages/home/home'
     })
   },
 

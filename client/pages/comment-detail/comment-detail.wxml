@@ -1,5 +1,4 @@
 <!--pages/comment-detail/comment-detail.wxml-->
-
 <view class='detail-card'>
   <image class='detail-image' mode='widthFix' src='{{movie.image}}'></image>
   <view class='detail-name'>{{movie.title}}</view>
@@ -9,9 +8,13 @@
   </view>
   <view wx:if="{{comment.voice.length < 10}}" class='detail-desc'>{{comment.content}}</view>
   <view wx:else class='voice-opt' bindtap='playRecord'>播放影评</view>
-  <view class='detail-opt'>
+  <view wx:if="{{publishStatus === 1}}" class='split'></view>
+  <view wx:if="{{publishStatus === 0}}" class='detail-opt'>
     <view wx:if="{{starId === 0}}" class='opt-star-comment' bindtap='starComment'>收藏影评</view>
     <view wx:else class='opt-star-comment' bindtap='starCancel'>取消收藏</view>
     <view class='opt-add-comment' bindtap='addComment'>添加影评</view>
+  </view>
+  <view wx:if="{{publishStatus === 1}}" class='opr-cnt'>
+    <view class='opr-back' bindtap='toList'>回到首页</view>
   </view>
 </view>

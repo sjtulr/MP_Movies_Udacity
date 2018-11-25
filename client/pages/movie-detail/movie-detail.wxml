@@ -6,6 +6,7 @@
   <view class='detail-desc'>{{movie.description}}</view>
   <view class='detail-opt'>
     <view class='opt-see-comment' bindtap='seeComment'>查看影评</view>
-    <view class='opt-add-comment' bindtap='addComment'>添加影评</view>
+    <view wx:if="{{publishStatus === 0}}" class='opt-add-comment' bindtap='addComment'>添加影评</view>
+    <view wx:else class='opt-add-comment' bindtap='commentDetail'>我的影评</view>
   </view>
 </view>
